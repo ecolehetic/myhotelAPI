@@ -1,0 +1,15 @@
+<div class="span11">
+      <h1><?php echo $page->title ?></h1>
+      <?php foreach($content as $i=>$item): ?>
+      <div class="media">
+        <span class="pull-<?php if(is_int($i/2)){echo 'left';}else{echo 'right';} ?>">
+          <img class="media-object" src="public/assets/<?php echo $item->picture ?>" />
+        </span>
+        <div class="media-body">
+          <h2><?php echo $item->title ?></h2>
+          <p><?php echo $item->content ?></p>
+        </div>
+      </div>
+      <?php endforeach; ?>
+      
+    </div>

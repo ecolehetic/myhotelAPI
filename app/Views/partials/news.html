@@ -1,0 +1,22 @@
+<div class="span8">
+      <h1><?php echo $page->title ?></h1>
+      <p><?php echo $page->content ?></p>
+      
+      <ul class="news-items">
+        <?php foreach($content as $item): ?>
+        <li>
+          <a href="<?php echo $item->url ?>" target="_blank"><?php echo $item->title ?></a>
+          <p><?php echo $item->content ?></p>
+        </li>
+        <?php endforeach; ?>
+     </ul>
+    </div>
+<aside class="span3 pull-right">
+<h3>Pre-Order the Leap Motion Controller</h3>
+<p>We're shipping a limited number so don't wait.</p>
+<a href="https://www.leapmotion.com/preorder" class="btn btn-large">Pre-Order $69.99</a>
+<hr>
+<h3>Be a Leap Motion Developer</h3>
+<p>Ready to make history? Help us change computing forever.</p>
+<a href="https://www.leapmotion.com/developer_applications" class="cta btn btn-large" data-menu-id="developer_application">Apply</a>
+</aside>
