@@ -1,17 +1,7 @@
-#f3 - dotcloud boilerplate
+#myhotelAPI - H3P2015 sandbox
 
-boilerplate for f3 MVC ready to deploy on dotcloud.
+API based on f3 with apiary.io documentation and dotcloud deployment.
 
-[Install dotcloud CLI and setup](http://docs.dotcloud.com/firststeps/install/)
+[Documentation for API](http://docs.dotcloud.com/firststeps/install/)
 
-Git clone this repo to yourapp/
-
-Edit dotcloud.yml with your specific stack if necessary. (default : php/mysql)
-
-then:
-
-	cd yourapp/
-	dotcloud create yourapp
-	dotcloud push
-
-
+[API on dotcloud](http://docs.dotcloud.com/firststeps/install/)
