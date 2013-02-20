@@ -1,26 +1,58 @@
 <?php
 class hotels{
-  
-  private $hotels;
-  public $output;
+
+  private $output;
+  private $rep;
+  private $dB;
   
   function __construct(){
-    F3::set('dB',new DB\SQL('mysql:host='.F3::get('db_host').';port=3306;dbname='.F3::get('db_server'),F3::get('db_login'),F3::get('db_password')));
-    $this->hotels=new DB\SQL\Mapper(F3::get('dB'),'hotels');
+    $this->output=array();
+    $this->rep = new representation();
+    $this->dB = new DB\SQL('mysql:host='.F3::get('db_host').';port=3306;dbname='.F3::get('db_server'),F3::get('db_login'),F3::get('db_password'));
+    
   }
+  
 
   function get(){
     $id=F3::get('PARAMS.id');
-    $req=$id?array('id=?',$id):'';
-    if(!$this->output=$this->hotels->find($req)){
-      F3::error(403);
-      return
+    $hotels=new DB\SQL\Mapper($this->dB,'hotels');
+    
+    if($id){
+      $mapper=$hotels->load(array('id=?',$id));
+      $this->output['hotels'] = $this->rep->format($mapper,array('url'=>'/hotels/mapper->id','name'=>'mapper->name','address'=>'mapper->address','lat'=>'mapper->lat','lng'=>'mapper->lng'));
+      
+      $rooms=new DB\SQL\Mapper($this->dB,'rooms');
+      $mapper=$rooms->find(array('idHotels=?',$id));
+      $this->output['rooms'] = $this->rep->format($mapper,array('url'=>'/rooms/mapper->id','name'=>'mapper->name','maxPax'=>'mapper->pax'));
     }
+    else{
+      if(F3::get('GET.name')){
+        $search=array('name like "%'.F3::get('GET.name').'%"');
+      }
+      else{
+        $search=array();
+      }
+      $mapper=$hotels->find($search);
+      $this->output['hotels'] = $this->rep->format($mapper,array('url'=>'/hotels/mapper->id','name'=>'mapper->name','address'=>'mapper->address','lat'=>'mapper->lat','lng'=>'mapper->lng'));
+    }
+     
+  }
+  function post(){
+    $this->output['error']=403;    
+  }
+  
+  function put(){
+    $this->output['error']=403;
+  }
+  
+  function delete(){
+    $this->output['error']=403;
   }
   
   function afterroute(){
-    echo Views::instance()->toJSON($this->output,array());
+    $this->rep->render($this->output,F3::get('REQUEST.format'));
   }
+  
   
 }
 ?>
