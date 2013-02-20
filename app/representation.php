@@ -2,8 +2,13 @@
 class representation{
   
   private function _json($output){
-      header('Content-Type: application/json');
-      echo stripslashes(json_encode($output));
+      if(F3::get('REQUEST.callback')){
+        header('Content-Type: application/javascript, charset=UTF-8');
+        echo F3::get('REQUEST.callback').'('.json_encode($output,JSON_HEX_QUOT).')';
+        return;
+      }
+      header('Content-Type: application/x-json, charset=UTF-8');
+      echo json_encode($output);
   }
   
   private function _xml($output){
