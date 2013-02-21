@@ -4,7 +4,7 @@ class representation{
   private function _json($output){
       if(F3::get('REQUEST.callback')){
         header('Content-Type: application/javascript, charset=UTF-8');
-        echo F3::get('REQUEST.callback').'('.json_encode($output,JSON_HEX_QUOT).')';
+        echo F3::get('REQUEST.callback').'('.json_encode($output).')';
         return;
       }
       header('Content-Type: application/json, charset=UTF-8');
