@@ -26,12 +26,8 @@ class hotels{
       $this->output['rooms'] = $this->rep->format($mapper,array('url'=>'/rooms/mapper->id','name'=>'mapper->name','maxPax'=>'mapper->pax'));
     }
     else{
-      if(F3::get('GET.name')){
-        $search=array('name like "%'.F3::get('GET.name').'%"');
-      }
-      else{
-        $search=array();
-      }
+      $search=F3::get('GET.name')?array('name like "%'.F3::get('GET.name').'%"'):array();
+      
       $mapper=$hotels->find($search);
       $this->output['hotels'] = $this->rep->format($mapper,array('url'=>'/hotels/mapper->id','name'=>'mapper->name','address'=>'mapper->address','lat'=>'mapper->lat','lng'=>'mapper->lng'));
     }

@@ -13,7 +13,7 @@ class booking{
   }
   
   function beforeroute(){
-    $this->account=F3::get('GET.account');
+    $this->account=F3::get('REQUEST.account');
     if(!$this->account){
       $this->output['error']=400;
       $this->afterroute();

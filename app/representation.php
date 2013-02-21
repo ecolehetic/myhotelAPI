@@ -7,7 +7,7 @@ class representation{
         echo F3::get('REQUEST.callback').'('.json_encode($output,JSON_HEX_QUOT).')';
         return;
       }
-      header('Content-Type: application/x-json, charset=UTF-8');
+      header('Content-Type: application/json, charset=UTF-8');
       echo json_encode($output);
   }
   
@@ -29,7 +29,8 @@ class representation{
       else{
         $this->status(200);
       }
-      call_user_func(array($this,'_'.$format),$output);
+      if(is_callable(array($this,'_'.$format)))
+        call_user_func(array($this,'_'.$format),$output);
     }
   }
   
