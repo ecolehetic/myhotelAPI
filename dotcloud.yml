@@ -2,3 +2,4 @@ www:
     type: php
 db:
     type: mysql
+    type: mongodb
